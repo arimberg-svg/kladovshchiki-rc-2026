@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Кладовщики РЦ, апрель-ноябрь 2026</title>
+  <meta name="theme-color" content="#4208A8" />
+  <style>
+    :root {
+      --p: #4208A8;
+      --g: #CCCCCC;
+      --ink: #000000;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+    header img {
+      width: 250px;
+      height: auto;
+      display: block;
+      background: #fff;
+    }
+    .motto {
+      margin: 14px 0 0;
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.01em;
+    }
+    h1 {
+      margin: 18px 0 8px;
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 40px;
+      line-height: 1.05;
+      font-weight: 900;
+    }
+    h2 {
+      margin: 36px 0 12px;
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .lead { margin: 0; max-width: 68ch; }
+    .note {
+      margin-top: 14px;
+      max-width: 78ch;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .stat {
+      border: 1px solid var(--g);
+      padding: 14px 14px 12px;
+      min-height: 112px;
+    }
+    .stat b {
+      display: block;
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 36px;
+      line-height: 1;
+      color: var(--p);
+    }
+    .stat span { display: block; margin-top: 8px; }
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 22px 0 12px;
+    }
+    .tools button, .tools input {
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      border: 1px solid var(--ink);
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 12px;
+    }
+    .tools button[aria-pressed="true"] {
+      background: var(--p);
+      color: #fff;
+      border-color: var(--p);
+    }
+    .tools input { min-width: 220px; }
+    .tools input:focus, .tools button:focus {
+      outline: 2px solid var(--p);
+      outline-offset: 2px;
+    }
+    .shown { margin: 0 0 10px; }
+    .scroll { overflow-x: auto; border-top: 4px solid var(--p); }
+    table { width: 100%; border-collapse: collapse; min-width: 920px; }
+    th, td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--g); vertical-align: middle; }
+    th {
+      font-family: "Arial Black", Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    td.name { white-space: nowrap; font-size: 16px; }
+    td.period, td.status { font-size: 14px; white-space: nowrap; }
+    tr.group td {
+      font-family: "Arial Black", Arial, sans-serif;
+      background: var(--p);
+      color: #fff;
+      border-bottom: 0;
+      padding: 8px 10px;
+    }
+    .mark {
+      width: 44px;
+      height: 22px;
+      margin: 0 auto;
+      border-radius: 4px;
+      border: 1px solid var(--g);
+      background: #fff;
+    }
+    .mark.k { background: var(--p); border-color: var(--p); }
+    .mark.p { background: var(--g); border-color: var(--p); border-width: 2px; }
+    td.m { width: 58px; text-align: center; }
+    .legend { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin: 8px 0 0; }
+    .legend i { display: inline-block; width: 28px; height: 14px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+    .legend .k { background: var(--p); }
+    .legend .p { background: var(--g); border: 2px solid var(--p); }
+    .legend .e { background: #fff; border: 1px solid var(--g); }
+    .chart {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      align-items: end;
+      min-height: 180px;
+      border-bottom: 2px solid var(--ink);
+      padding-top: 8px;
+      position: relative;
+    }
+    .col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-height: 170px; }
+    .bar {
+      width: 100%;
+      max-width: 72px;
+      background: var(--p);
+    }
+    .col em, .col strong { font-style: normal; margin-top: 6px; }
+    .col strong { font-family: "Arial Black", Arial, sans-serif; }
+    .plan {
+      margin: 8px 0 0;
+    }
+    .moves { min-width: 720px; }
+    .moves td { vertical-align: top; }
+    footer { margin-top: 28px; max-width: 78ch; }
+    @media (max-width: 800px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      h1 { font-size: 32px; }
+    }
+    @media print {
+      .tools { display: none; }
+      .wrap { width: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="assets/logo.png" width="250" alt="У Михалыча" />
+      <p class="motto">Делаем мир крепче</p>
+      <h1>Кладовщики РЦ</h1>
+      <p class="lead">Кто работал с апреля по ноябрь 2026 и кто ушёл. Календарь по снимкам штата на 1-е число. В таблице только имя и фамилия.</p>
+      <p class="note">Клетка закрашена, если в этот день человек числился кладовщиком. Больничный и отпуск человека не стирают: он остаётся в штате. День приказа в выгрузке не написан. Видна граница между снимками: был 1 апреля, 1 мая уже нет.</p>
+      <p class="note">Кто стоял уже 1 апреля, мог работать и раньше. Если человек перешёл в другой отдел компании, из этого отчёта он тоже пропадает.</p>
+    </header>
+
+    <section class="stats" id="stats"></section>
+
+    <h2>Календарь</h2>
+    <div class="legend">
+      <span><i class="k"></i>кладовщик</span>
+      <span><i class="p"></i>кладовщик, водитель погрузчика</span>
+      <span><i class="e"></i>в этом снимке нет</span>
+    </div>
+    <div class="tools">
+      <button type="button" data-filter="all" aria-pressed="true">Все</button>
+      <button type="button" data-filter="staff" aria-pressed="false">В штате на 1 ноября</button>
+      <button type="button" data-filter="left" aria-pressed="false">Ушли из отдела</button>
+      <button type="button" data-filter="role" aria-pressed="false">Сменили должность</button>
+      <input id="q" type="search" placeholder="Имя или фамилия" aria-label="Найти сотрудника" />
+    </div>
+    <p class="shown" id="shown"></p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr id="head"></tr>
+        </thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+
+    <h2>Сколько кладовщиков на 1-е число</h2>
+    <p>Считаются только люди на должности «Кладовщик». План в расписании: 14 ставок. Валерий Пальянов с сентября в этот столбец не входит, он на смежной должности и по-прежнему в штате.</p>
+    <div class="chart" id="chart"></div>
+    <p class="plan" id="plan"></p>
+
+    <h2>Кто пришёл и кто ушёл</h2>
+    <p>Граница между двумя снимками. Имена тех, кто появился на должности «Кладовщик», пропал из отдела или сменил должность внутри отдела.</p>
+    <div class="scroll">
+      <table class="moves">
+        <thead>
+          <tr>
+            <th>Граница</th>
+            <th>Пришли</th>
+            <th>Ушли из отдела</th>
+            <th>Смена должности</th>
+          </tr>
+        </thead>
+        <tbody id="moves"></tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p>Отдел складской и транспортной логистики, «У Михалыча». Снимки от 1 апреля, 1 мая, 1 июня, 1 июля, 1 августа, 1 сентября, 1 октября и 1 ноября 2026 года.</p>
+    </footer>
+  </div>
+  <script>
+    const MONTHS = [["Апр", "апрель", "апреля", "1 апреля"], ["Май", "май", "мая", "1 мая"], ["Июн", "июнь", "июня", "1 июня"], ["Июл", "июль", "июля", "1 июля"], ["Авг", "август", "августа", "1 августа"], ["Сен", "сентябрь", "сентября", "1 сентября"], ["Окт", "октябрь", "октября", "1 октября"], ["Ноя", "ноябрь", "ноября", "1 ноября"]];
+    const PEOPLE = [{"key": "staff", "title": "В штате на 1 ноября", "people": [{"first": "Азат", "last": "Бикмулин", "cells": ["k", "k", "k", "k", "k", "k", "k", "k"], "period": "с апреля по ноябрь", "status": "в штате"}, {"first": "Сергей", "last": "Бронников", "cells": ["", "", "", "k", "k", "k", "k", "k"], "period": "с июля по ноябрь", "status": "в штате"}, {"first": "Иван", "last": "Веселовский", "cells": ["", "", "", "", "", "", "k", "k"], "period": "с октября по ноябрь", "status": "в штате"}, {"first": "Андрей", "last": "Горб", "cells": ["k", "k", "k", "k", "k", "k", "k", "k"], "period": "с апреля по ноябрь", "status": "в штате"}, {"first": "Илья", "last": "Коркин", "cells": ["k", "k", "k", "k", "k", "k", "k", "k"], "period": "с апреля по ноябрь", "status": "в штате"}, {"first": "Денис", "last": "Коростин", "cells": ["", "k", "k", "k", "k", "k", "k", "k"], "period": "с мая по ноябрь", "status": "в штате"}, {"first": "Денис", "last": "Куроптев", "cells": ["k", "k", "k", "k", "k", "k", "k", "k"], "period": "с апреля по ноябрь", "status": "в штате"}, {"first": "Анатолий", "last": "Логинов", "cells": ["", "", "", "", "", "", "k", "k"], "period": "с октября по ноябрь", "status": "в штате"}, {"first": "Антон", "last": "Мыльцев", "cells": ["k", "k", "k", "k", "k", "k", "k", "k"], "period": "с апреля по ноябрь", "status": "в штате"}, {"first": "Валерий", "last": "Пальянов", "cells": ["k", "k", "k", "k", "k", "p", "p", "p"], "period": "с апреля по ноябрь", "status": "в штате, с сентября погрузчик"}, {"first": "Никита", "last": "Самыгин", "cells": ["", "k", "k", "k", "k", "k", "k", "k"], "period": "с мая по ноябрь", "status": "в штате"}, {"first": "Дмитрий", "last": "Сизиков", "cells": ["", "k", "k", "k", "k", "k", "k", "k"], "period": "с мая по ноябрь", "status": "в штате"}, {"first": "Владимир", "last": "Татаринов", "cells": ["k", "k", "k", "k", "k", "k", "k", "k"], "period": "с апреля по ноябрь", "status": "в штате"}, {"first": "Игорь", "last": "Шангов", "cells": ["", "", "", "", "", "k", "k", "k"], "period": "с сентября по ноябрь", "status": "в штате"}]}, {"key": "left", "title": "Ушли из отдела", "people": [{"first": "Михаил", "last": "Волков", "cells": ["k", "", "", "", "", "", "", ""], "period": "апрель", "status": "ушёл до 1 мая"}, {"first": "Евгений", "last": "Костромин", "cells": ["k", "", "", "", "", "", "", ""], "period": "апрель", "status": "ушёл до 1 мая"}, {"first": "Лев", "last": "Кузнецов", "cells": ["k", "", "", "", "", "", "", ""], "period": "апрель", "status": "ушёл до 1 мая"}, {"first": "Дмитрий", "last": "Княжев", "cells": ["k", "k", "", "", "", "", "", ""], "period": "с апреля по май", "status": "ушёл до 1 июня"}, {"first": "Константин", "last": "Лепёшкин", "cells": ["k", "k", "", "", "", "", "", ""], "period": "с апреля по май", "status": "ушёл до 1 июня"}, {"first": "Никита", "last": "Шушарин", "cells": ["k", "k", "", "", "", "", "", ""], "period": "с апреля по май", "status": "ушёл до 1 июня"}, {"first": "Айдан", "last": "Набиев", "cells": ["k", "k", "k", "", "", "", "", ""], "period": "с апреля по июнь", "status": "ушёл до 1 июля"}, {"first": "Александр", "last": "Кобец", "cells": ["", "k", "k", "k", "", "", "", ""], "period": "с мая по июль", "status": "ушёл до 1 августа"}, {"first": "Вячеслав", "last": "Иордан", "cells": ["", "", "", "", "k", "", "", ""], "period": "август", "status": "ушёл до 1 сентября"}, {"first": "Никита", "last": "Кудрявцев", "cells": ["", "", "", "k", "k", "k", "", ""], "period": "с июля по сентябрь", "status": "ушёл до 1 октября"}, {"first": "Артём", "last": "Портнов", "cells": ["", "", "", "k", "k", "k", "", ""], "period": "с июля по сентябрь", "status": "ушёл до 1 октября"}]}, {"key": "role", "title": "Остался в отделе, другая должность", "people": [{"first": "Юрий", "last": "Чукреев", "cells": ["k", "k", "k", "", "", "", "", ""], "period": "с апреля по июнь", "status": "комплектовщик с июля"}]}];
+    const COUNTS = [15, 16, 13, 14, 14, 13, 13, 13];
+    const MOVES = [{"when": "К 1 мая", "joined": ["Александр Кобец", "Денис Коростин", "Никита Самыгин", "Дмитрий Сизиков"], "left": ["Михаил Волков", "Евгений Костромин", "Лев Кузнецов"], "changed": []}, {"when": "К 1 июня", "joined": [], "left": ["Дмитрий Княжев", "Константин Лепёшкин", "Никита Шушарин"], "changed": []}, {"when": "К 1 июля", "joined": ["Сергей Бронников", "Никита Кудрявцев", "Артём Портнов"], "left": ["Айдан Набиев"], "changed": ["Юрий Чукреев: комплектовщик"]}, {"when": "К 1 августа", "joined": ["Вячеслав Иордан"], "left": ["Александр Кобец"], "changed": []}, {"when": "К 1 сентября", "joined": ["Игорь Шангов"], "left": ["Вячеслав Иордан"], "changed": ["Валерий Пальянов: кладовщик, водитель погрузчика"]}, {"when": "К 1 октября", "joined": ["Иван Веселовский", "Анатолий Логинов"], "left": ["Никита Кудрявцев", "Артём Портнов"], "changed": []}, {"when": "К 1 ноября", "joined": [], "left": [], "changed": []}];
+
+    const head = document.getElementById("head");
+    head.innerHTML = "<th>Сотрудник</th>" + MONTHS.map((m) => `<th class="m">${m[0]}</th>`).join("") + "<th>Период</th><th>Статус</th>";
+
+    const stats = document.getElementById("stats");
+    const cards = [
+      ["26", "человек побывали кладовщиками за эти месяцы"],
+      ["13", "на должности «Кладовщик» 1 ноября. Пальянов тоже в штате, на смежной должности"],
+      ["11", "пропали из отдела между снимками"],
+      ["1", "сменил должность и остался: Юрий Чукреев, комплектовщик с июля"]
+    ];
+    stats.innerHTML = cards.map(([n, t]) => `<article class="stat"><b>${n}</b><span>${t}</span></article>`).join("");
+
+    const chart = document.getElementById("chart");
+    chart.innerHTML = COUNTS.map((n, i) => {
+      const h = Math.round(n / 16 * 140);
+      return `<div class="col"><div class="bar" style="height:${h}px" title="${MONTHS[i][3]}: ${n}"></div><strong>${n}</strong><em>${MONTHS[i][0]}</em></div>`;
+    }).join("");
+    document.getElementById("plan").textContent = "Самая высокая точка на графике: 16 человек 1 мая. Самая низкая: 13. План ставок всё это время один: 14.";
+
+    document.getElementById("moves").innerHTML = MOVES.map((row) => {
+      const cell = (list) => list.length ? list.map(escapeHtml).join(", ") : "никого";
+      return `<tr><td>${escapeHtml(row.when)}</td><td>${cell(row.joined)}</td><td>${cell(row.left)}</td><td>${cell(row.changed)}</td></tr>`;
+    }).join("");
+
+    let filter = "all";
+    const q = document.getElementById("q");
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    }
+
+    function mark(cell, monthLabel) {
+      const title = cell === "k"
+        ? `${monthLabel}: кладовщик`
+        : cell === "p"
+          ? `${monthLabel}: кладовщик, водитель погрузчика`
+          : `${monthLabel}: нет в снимке`;
+      return `<td class="m"><div class="mark ${cell}" title="${escapeHtml(title)}"></div></td>`;
+    }
+
+    function render() {
+      const query = q.value.trim().toLowerCase();
+      const body = document.getElementById("body");
+      const parts = [];
+      let shown = 0;
+      for (const group of PEOPLE) {
+        if (filter !== "all" && filter !== group.key) continue;
+        const rows = group.people.filter((p) => {
+          const name = (p.first + " " + p.last).toLowerCase();
+          return !query || name.includes(query) || (p.last + " " + p.first).toLowerCase().includes(query);
+        });
+        if (!rows.length) continue;
+        if (filter === "all" && !query) {
+          parts.push(`<tr class="group"><td colspan="11">${escapeHtml(group.title)}</td></tr>`);
+        }
+        for (const p of rows) {
+          shown += 1;
+          const name = `${p.first} ${p.last}`;
+          parts.push(
+            `<tr><td class="name">${escapeHtml(name)}</td>` +
+            p.cells.map((c, i) => mark(c, MONTHS[i][3])).join("") +
+            `<td class="period">${escapeHtml(p.period)}</td><td class="status">${escapeHtml(p.status)}</td></tr>`
+          );
+        }
+      }
+      body.innerHTML = parts.join("") || `<tr><td colspan="11">Никого не нашли. Попробуйте другую фамилию.</td></tr>`;
+      document.getElementById("shown").textContent = `В таблице ${shown}.`;
+    }
+
+    document.querySelectorAll(".tools button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filter = btn.dataset.filter;
+        document.querySelectorAll(".tools button").forEach((b) => b.setAttribute("aria-pressed", b === btn ? "true" : "false"));
+        render();
+      });
+    });
+    q.addEventListener("input", render);
+    const params = new URLSearchParams(location.search);
+    const initial = params.get("filter");
+    if (initial && ["all", "staff", "left", "role"].includes(initial)) {
+      filter = initial;
+      document.querySelectorAll(".tools button").forEach((b) => {
+        b.setAttribute("aria-pressed", b.dataset.filter === filter ? "true" : "false");
+      });
+    }
+    if (params.get("q")) q.value = params.get("q");
+    render();
+  </script>
+</body>
+</html>
